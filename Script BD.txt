@@ -1,0 +1,191 @@
+--Crear la base de datos
+create database E_CONDOSA
+
+--En E_CONDONSA
+--Crear las tablas:
+create table CLIENTE(
+  idCliente int not null,
+  nombre varchar(50) not null,
+  aPaterno varchar(50) not null,
+  aMaterno varchar(50) not null,
+  nroDNI int not null unique,
+  constraint pk_idCliente primary key (idCliente)
+);
+
+create table CASA_DEPARTAMENTO(
+  idDomicilio int not null,
+  area int not null,
+  idCliente int,
+  direccion varchar(150) not null,
+  categoria varchar(5) not null,
+  habitantes int not null,
+  constraint pk_idDomicilio primary key (idDomicilio),
+  constraint fk_idCliente foreign key (idCliente) references CLIENTE(idCliente)
+);
+
+create table PROVEEDOR(
+  idProveedor int not null,
+  nombre varchar(50) not null,
+  constraint pk_idProveedor primary key (idProveedor)
+);
+
+create table MANTENIMIENTO(
+  idMantenimiento int not null,
+  idProveedor int not null,
+  descripcion varchar(50) not null,
+  totalCosto float not null,
+  fecha date not null,
+  constraint pk_idMantenimiento primary key (idMantenimiento),
+  constraint fk_idProveedor foreign key (idProveedor) references PROVEEDOR(idProveedor)
+);
+
+create table RECIBO(
+  idRecibo int not null,
+  idDomicilio int not null,
+  idMantenimiento int not null,
+  montoMantenimiento float not null,
+  fechaEmision date not null,
+  fechaVencimiento date not null,
+  constraint fk_idDomicilioRe foreign key (idDomicilio) references CASA_DEPARTAMENTO(idDomicilio),
+  constraint fk_idMantenimiento foreign key (idMantenimiento) references MANTENIMIENTO(idMantenimiento),
+);
+
+--Insertamos datos:
+INSERT INTO [dbo].[CLIENTE]([idCliente],[nombre],[aPaterno],[aMaterno],[nroDNI])
+     VALUES(100,'Diego','Perez','Soto','12345678');
+INSERT INTO [dbo].[CLIENTE]([idCliente],[nombre],[aPaterno],[aMaterno],[nroDNI])
+     VALUES(101,'Juan','Rodriguez','Ramos','87654321');
+INSERT INTO [dbo].[CLIENTE]([idCliente],[nombre],[aPaterno],[aMaterno],[nroDNI])
+     VALUES(102,'Maria','Soto','Flores','85236741');
+INSERT INTO [dbo].[CLIENTE]([idCliente],[nombre],[aPaterno],[aMaterno],[nroDNI])
+     VALUES(103,'Esteban','Quintana','Soto','10236547');
+INSERT INTO [dbo].[CLIENTE]([idCliente],[nombre],[aPaterno],[aMaterno],[nroDNI])
+     VALUES(104,'Paola','Paredes','Vilca','76543210');
+
+INSERT INTO [dbo].[CASA_DEPARTAMENTO]([idDomicilio],[area],[idCliente],[direccion],[categoria],[habitantes])
+     VALUES(20000,40,100,'Condominios CONDOSA - Área C Dpto 300','P1',3)
+INSERT INTO [dbo].[CASA_DEPARTAMENTO]([idDomicilio],[area],[idCliente],[direccion],[categoria],[habitantes])
+     VALUES(20001,30,101,'Condominios CONDOSA - Área C Dpto 301','P2',4)
+INSERT INTO [dbo].[CASA_DEPARTAMENTO]([idDomicilio],[area],[idCliente],[direccion],[categoria],[habitantes])
+     VALUES(20002,50,102,'Condominios CONDOSA - Área C Dpto 302','P1',3)
+INSERT INTO [dbo].[CASA_DEPARTAMENTO]([idDomicilio],[area],[idCliente],[direccion],[categoria],[habitantes])
+     VALUES(20003,40,103,'Condominios CONDOSA - Área A Dpto 100','P2',4)
+INSERT INTO [dbo].[CASA_DEPARTAMENTO]([idDomicilio],[area],[idCliente],[direccion],[categoria],[habitantes])
+     VALUES(20004,70,104,'Condominios CONDOSA - Área B Dpto 200','P1',2)
+
+INSERT INTO [dbo].[PROVEEDOR]([idProveedor],[nombre])
+     VALUES(57100,'CONDOSA')
+INSERT INTO [dbo].[PROVEEDOR]([idProveedor],[nombre])
+     VALUES(57101,'SEDAPAL')
+INSERT INTO [dbo].[PROVEEDOR]([idProveedor],[nombre])
+     VALUES(57102,'ADMIN. CONDOSA')
+
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890000,57100,'Limpieza',1000,DATEADD(DAY, -19, SYSDATETIME()))
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890001,57100,'Luz del predio',2000,DATEADD(DAY, -19, SYSDATETIME()))
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890002,57101,'Agua',2000,DATEADD(DAY, -19, SYSDATETIME()))
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890003,57100,'Conserv. áreas verders',1000,DATEADD(DAY, -19, SYSDATETIME()))
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890004,57100,'Luz áreas comunes',1000,DATEADD(DAY, -19, SYSDATETIME()))
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890005,57102,'Arbitrios',1500,DATEADD(DAY, -19, SYSDATETIME()))
+INSERT INTO [dbo].[MANTENIMIENTO]([idMantenimiento],[idProveedor],[descripcion],[totalCosto],[fecha])
+     VALUES(890006,57100,'Servicios',1000,DATEADD(DAY, -19, SYSDATETIME()))
+
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890000,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890000 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890001,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890001 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890002,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890002 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890003,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890003 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890004,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890004 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890005,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890005 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300000,20000,890006,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890006 AND D.idDomicilio = 20000)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890000,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890000 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890001,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890001 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890002,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890002 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890003,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890003 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890004,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890004 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890005,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890005 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+INSERT INTO [dbo].[RECIBO]([idRecibo],[idDomicilio],[idMantenimiento],[montoMantenimiento],[fechaEmision],[fechaVencimiento])
+     VALUES(2300001,20001,890006,
+	 (select (C.totalCosto*D.area)/230 from MANTENIMIENTO C,CASA_DEPARTAMENTO D where C.idMantenimiento = 890006 AND D.idDomicilio = 20001)
+	 ,DATEADD(DAY, -18, SYSDATETIME()),DATEADD(DAY, -13, SYSDATETIME()))
+
+
+
+
+--Selects utilizados (NO ES NECESARIO CORRER PARA IMPLEMENTAR)
+select M.descripcion, P.nombre, M.totalCosto from MANTENIMIENTO M, PROVEEDOR P where P.idProveedor=M.idProveedor;
+select idCliente, nombre+' '+aPaterno+' '+aMaterno as nombreCompleto from CLIENTE;
+select ((sum(M.totalCosto)*50)/230)*0.5 from MANTENIMIENTO M, CASA_DEPARTAMENTO C;
+select sum(C.area) from CASA_DEPARTAMENTO C;
+--Costo mínimo de mantenimiento
+select CAST(((sum(M.totalCosto)/count(CL.idCliente))*0.5) AS DECIMAL(20,2)) as minimo, 10000.00 as caja from MANTENIMIENTO M, CLIENTE CL;
+select count(CL.idCliente) from CLIENTE CL;
+
+select top (1)
+	C.nombre+' '+C.aPaterno+' '+C.aMaterno as nombreCompleto,
+	DO.direccion,
+	C.nroDNI,
+	R.fechaEmision,
+	R.fechaVencimiento
+from CLIENTE C, CASA_DEPARTAMENTO DO, RECIBO R where C.idCliente=100 AND DO.idCliente=100 AND
+R.idDomicilio = DO.idDomicilio;
+
+select top (1)
+	R.idRecibo,
+	DO.area
+from CASA_DEPARTAMENTO DO, RECIBO R where DO.idCliente = 100 AND
+R.idDomicilio=DO.idDomicilio;
+
+
+select CAST(R.montoMantenimiento AS DECIMAL(20,2)) as monto from RECIBO R where R.idDomicilio = (
+select idDomicilio from CASA_DEPARTAMENTO where idCliente=100
+);
+
+select CAST(sum(R.montoMantenimiento) AS DECIMAL(20,2)) as neto, CAST((sum(R.montoMantenimiento)*0.18) AS DECIMAL(20,2)) as igv,
+CAST((sum(R.montoMantenimiento)*1.18) AS DECIMAL(20,2)) as total
+from RECIBO R where R.idDomicilio = (
+select idDomicilio from CASA_DEPARTAMENTO where idCliente=100);
