@@ -5,5 +5,6 @@ Flask==2.3.2
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.2
+psycopg2==2.9.6
 pyodbc==4.0.39
 Werkzeug==2.3.4

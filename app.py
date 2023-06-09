@@ -37,7 +37,6 @@ def cuadroCostos():
 def reciboTotal():
     return render_template("reciboTotal.html")
 
-
 @app.route('/descargarRecibo')
 def descargarRecibo():
     datos_recibo = obtener_datos_recibo_estado()
