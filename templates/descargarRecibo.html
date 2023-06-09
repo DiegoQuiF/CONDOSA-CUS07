@@ -21,6 +21,11 @@
     </nav>
     <br>
     <h5>• 3. DESCARGAR RECIBOS DE MANTENIMIENTO</h5>
+    <div class="container text-center">
+        {% for predio in predios %}
+            <h3>{{ predio.predios }}</h3>
+        {% endfor %}
+    </div>
     <br>
     <div class="container text-center">
         <div class="row align-items-start">
