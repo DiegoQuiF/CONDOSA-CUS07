@@ -8,14 +8,6 @@ APP:
     .\venv\Scripts\activate
 4. Instale todas las dependencias
     pip install -r requirements.txt
-5. Cambie las credenciales de su base de datos en: app.py > def connection()
-    → Cambie las variables y/o descomente la línea de conexión (cstr) pertinente
-6. Inicie el servicio con cualquiera de los siguientes comandos
+5. Inicie el servicio con cualquiera de los siguientes comandos
     flask run
     python app.py
-
-
-BASE DE DATOS (SqlServer)
-1. Cree una base de datos llamada 'E_CONDOSA'
-2. Ejecute el script para crear tablas, secuencias y triggers:
-    → Script en el archivo "Script BD"
