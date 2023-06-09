@@ -5,7 +5,7 @@ import psycopg2
 app = Flask(__name__)
 
 
-#PÁGINA PRINCIPAL
+#PÁGINA PRINCIPAL a
 @app.route("/")
 def main():
     predios = []
