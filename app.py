@@ -29,18 +29,79 @@ def main():
         conn.close()
     return render_template("index.html", predios = predios, periodos = periodos)
 
-@app.route('/cuadroCostos')
-def cuadroCostos():
-    return render_template("cuadroCostos.html")
+@app.route("/<int:id>")
+def condominio(id):
+    predios = []
+    periodos = []
+    consulta1 = "select PR.id_predio, CONCAT(TP.nomre_predio, ' \"', PR.descripcion, '\"') as predios from tipo_predio TP, predio PR where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_predio = "+str(id)+";"
+    consulta2 = "select 'Último periodo' as periodos;"
+    conn = connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(consulta1)
+        for row in cursor.fetchall():
+            predios.append({"id_predio":row[0], "predios":row[1]})
+        
+        cursor.execute(consulta2)
+        for row in cursor.fetchall():
+            periodos.append({"periodos":row[0]})
+    except psycopg2.Error as error:
+        print('error al extrear los datos de la consulta: ', error)
+    finally:
+        cursor.close()
+        conn.close()
+    return render_template("index_CD.html", predios = predios, periodos = periodos)
 
-@app.route('/reciboTotal')
-def reciboTotal():
+@app.route('/<int:id>/cuadroCostos')
+def cuadroCostos(id):
+    cuadros = []
+    predios = []
+    consulta1 = "select CA.numero, PM.descripcion as bloque, CE.descripcion as estado, CA.area, (select sum(area) from estacionamiento where id_casa = CA.id_casa) as area_cochera, ((select sum(area) from estacionamiento where id_casa = CA.id_casa) + CA.area) as area_total, 'xxx.xx' as montominimo, 'xxx.xx' as montoxarea from casa CA, predio_mdu PM, casa_estado CE where CA.id_predio = "+str(id)+" and CA.id_predio_mdu = PM.id_predio_mdu and CE.id_estado = CA.id_estado;"
+    consulta2 = "select PR.id_predio, CONCAT(TP.nomre_predio, ' \"', PR.descripcion, '\"') as predios from tipo_predio TP, predio PR where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_predio = "+str(id)+";"
+    conn = connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(consulta1)
+        for row in cursor.fetchall():
+            cuadros.append({"numero":row[0], "bloque":row[1], "estado":row[2], "area":row[3], "area_cochera":row[4], "area_total":row[5], "montominimo":row[6], "montoxarea":row[7]})
+        
+        cursor.execute(consulta2)
+        for row in cursor.fetchall():
+            predios.append({"id_predio":row[0], "predios":row[1]})
+    except psycopg2.Error as error:
+        print('error al extrear los datos de la consulta: ', error)
+    finally:
+        cursor.close()
+        conn.close()
+    return render_template("cuadroCostos.html", cuadros = cuadros, predios = predios)
+
+@app.route('/<int:id>/cuadroCostos/descargarRecibo')
+def descargarRecibo(id):
+    cuadros = []
+    predios = []
+    consulta1 = "select CA.numero, PM.descripcion as bloque, CE.descripcion as estado, CA.area, (select sum(area) from estacionamiento where id_casa = CA.id_casa) as area_cochera, ((select sum(area) from estacionamiento where id_casa = CA.id_casa) + CA.area) as area_total, 'xxx.xx' as montominimo, 'xxx.xx' as montoxarea from casa CA, predio_mdu PM, casa_estado CE where CA.id_predio = "+str(id)+" and CA.id_predio_mdu = PM.id_predio_mdu and CE.id_estado = CA.id_estado;"
+    consulta2 = "select PR.id_predio, CONCAT(TP.nomre_predio, ' \"', PR.descripcion, '\"') as predios from tipo_predio TP, predio PR where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_predio = "+str(id)+";"
+    conn = connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute(consulta1)
+        for row in cursor.fetchall():
+            cuadros.append({"numero":row[0], "bloque":row[1], "estado":row[2], "area":row[3], "area_cochera":row[4], "area_total":row[5], "montominimo":row[6], "montoxarea":row[7]})
+        
+        cursor.execute(consulta2)
+        for row in cursor.fetchall():
+            predios.append({"id_predio":row[0], "predios":row[1]})
+    except psycopg2.Error as error:
+        print('error al extrear los datos de la consulta: ', error)
+    finally:
+        cursor.close()
+        conn.close()
+    return render_template("descargarRecibo.html", cuadros = cuadros, predios = predios)
+
+
+@app.route('/<int:id>/cuadroCostos/descargarRecibo/reciboTotal')
+def reciboTotal(id):
     return render_template("reciboTotal.html")
-
-@app.route('/descargarRecibo')
-def descargarRecibo():
-    datos_recibo = obtener_datos_recibo_estado()
-    return render_template("descargarRecibo.html", datos_recibo=datos_recibo)
 
 @app.route('/recibo_estado')
 def mostrar_recibo_estado():
