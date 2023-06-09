@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Invoice - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <!-- UNICA COLUMNA PRINCIPAL-->
+    <div class="col-md-12">
+        <!-- UNICA FILA PRINCIPAL, Ambos forman una CELDA-->
+        <div class="row">
+            <!--ESTRUCTURA DEL RECIBO, se aplican desplazamientos (offset) para centrarlo en cualquier pantalla-->
+            <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                <!--ESTA DIVIDIDA EN 4 FILAS-->
+                <!-- PRIMERA FILA PARA EL ENCABEZADO DEL RECIBO, tiene los datos del logo y algunos datos del destinatario-->
+                <div class="row">
+                    <!--Dividido en 2 columnas-->
+                    <div class="receipt-header">
+                        <!--Columna del logo-->
+                        <div class="col-xs-5 col-sm-5 col-md-5">
+                            <div class="receipt-left d-flex justify-content-center"> <!-- LOGO DEL PREDIO -->
+                                <img class="img-responsive" alt="iamgurdeeposahan"
+                                    src="https://th.bing.com/th/id/OIG.3xBMG4LseOZryOzkevz7?pid=ImgGn"
+                                    style="width: 160px; border-radius: 80px; margin-left: auto; margin-right: auto;">
+                            </div>
+                        </div>
+                        <!--Columna de datos-->
+                        <div class="col-xs-7 col-sm-7 col-md-7 text-right">
+                            <div class="receipt-right" style=" padding: 10px;">
+                                <table style="width: 100%; border-collapse: collapse; text-align: center;">
+                                    <tbody>
+                                        <tr style="height: 4.5px;">
+                                            <td style="width: 97%; height: 4.5px; border: 1px solid #000000;"
+                                                colspan="2">CONJUNTO RESIDENCIAL EL PALOMAR</td>
+                                        </tr>
+                                        <tr style="height: 3px;">
+                                            <td style="width: 97%; height: 3px; border: 1px solid #000000;" colspan="2">
+                                                RUC: 9999999999&nbsp;&nbsp;&nbsp;</td>
+                                        </tr>
+                                        <tr style="height: 9px;">
+                                            <td style="width: 44.8572%; height: 9px; border: 1px solid #000000;">
+                                                &nbsp;Recibo N&deg;</td>
+                                            <td style="width: 52.1428%; height: 9px; border: 1px solid #000000;">C 101 -
+                                                5831</td>
+                                        </tr>
+                                        <tr style="height: 12px;">
+                                            <td style="width: 44.8572%; height: 12px; border: 1px solid #000000;">
+                                                &nbsp;Periodo:&nbsp;</td>
+                                            <td style="width: 52.1428%; height: 12px; border: 1px solid #000000;">
+                                                &nbsp;Mar 23</td>
+                                        </tr>
+                                        <tr style="height: 10px;">
+                                            <td style="width: 97%; height: 10px; border: 1px solid #000000;"
+                                                colspan="2">
+                                                AV. PASEO LA CASTELLANA N&deg;123 TORRE NRO. C INT 1904 LIMA-LIMA-LINCE
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEGUNDA FILA PARA LOS DEMAS DATOS del destinatario del recibo -->
+                <div class="row">
+                    <div class="receipt-header receipt-header-mid">
+
+                        <!-- COLUMNA IZQUIERDA -->
+                        <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                            <div class="receipt-left">
+                                <h3 style="font-size: 25px;">Jose Alberto Torres Carranza</h3>
+                            </div>
+                        </div>
+                        <!-- COLUMNA DERECHA -->
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <div class="receipt-right">
+                                <h3></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- TERCERA FILA, es la tabla de datos de los gastos del recibo-->
+                <div>
+                    <!-- PRIMERA TABLA GASTOS COMUNES -->
+                    <table class="table table-bordered">
+                        <!--1ERA CABECERA -->
+                        <thead class="cabecera-1">
+                            <tr>
+                                <th class="text-left">Importe por servicios comunes</th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;">Habitación</span><br>
+                                    <span style="font-size: 12px; text-align: center;">C 101 </span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Area ocupada</span><br>
+                                    <span style="font-size: 12px; text-align: center;">90.5 </span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;">%Participación</span><br>
+                                    <span style="font-size: 12px; text-align: center;">0.31%</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--2DA CABECERA -->
+                        <thead class="cabecera-2">
+
+                            <tr>
+                                <th class="text-left" style="font-size: 11px;">Descripción</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Cantidad</span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Monto Total</span><br>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Importe S/.</span><br>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <!--CABECERA DE TIPO DE GASTOS -->
+                        <thead class="cabecera-3">
+                            <tr>
+                                <th class="text-left" style="font-size: 12px;">Gasto Laboral, Administración y
+                                    contabilidad</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span><br>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span><br>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Filas generadas dinámicamente-->
+                        <thead>
+                            <script>
+                                for (var i = 0; i < 3; i++) {
+                                    document.write(`
+                                        <tr>
+                                            <td class="col-md-9 ">Descrip Comun</td>
+                                            <td class="col-md-9 text-center">X</td>
+                                            <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.15,000.0</td>
+                                            <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.15.0</td>
+                                        </tr>
+                                    `);
+                                }
+                            </script>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span>Total Gasto Laboral, administración y
+                                                contabilidad:</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-right">
+                                    <h2><strong><span></span>S/.30,000.0</strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN>S/.3.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        <!--CABECERA DE TIPO DE GASTOS -->
+                        <thead class="cabecera-3">
+                            <tr>
+                                <th class="text-left" style="font-size: 12px;">Gasto Diversos</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span><br>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span><br>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!-- Filas generadas dinámicamente-->
+                        <thead>
+                            <script>
+                                for (var i = 0; i < 8; i++) {
+                                    document.write(`
+                                        <tr>
+                                            <td class="col-md-9 ">Descrip Comun</td>
+                                            <td class="col-md-9 text-center">X</td>
+                                            <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.15,000.0</td>
+                                            <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.15.0</td>
+                                        </tr>
+                                    `);
+                                }
+                            </script>
+                        </thead>
+                        <!--Total gastos de un tipo-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span>Total Gastos diversos:</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-right">
+                                    <h2><strong><span></span>S/.30,000.0</strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN>S/.3.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        <!-- TOTAL GASTOS POR SERV COMUNES-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span style="color: purple;">Total cuotas de mantenimiento por servicios
+                                                comunes:</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-right">
+                                    <h2><strong><span style="color: purple;">S/.30,000.0</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN
+                                                style="color: purple;">S/.3.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <!-- SEGUNDA TABLA GASTOS INDIVIDUALES -->
+                    <table class="table table-bordered">
+                        <thead class="cabecera-1">
+                            <!--1ERA CABECERA -->
+                            <tr>
+                                <th class="text-left">Importe por consumo individual</th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <thead class="cabecera-2">
+                            <!--2DA CABECERA -->
+                            <tr>
+                                <th class="text-left" style="font-size: 11px;">Descripción</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Cantidad</span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Importe S/.</span><br>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--CABECERA DE TIPO DE GASTOS -->
+                        <thead class="cabecera-3">
+                            <tr>
+                                <th class="text-left" style="font-size: 12px;">Gastos Individuales genericos</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span><br>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <!-- Filas generadas dinámicamente-->
+                        <thead>
+                            <script>
+                                for (var i = 0; i < 2; i++) {
+                                    document.write(`
+                                        <tr>
+                                            <td class="col-md-9 ">Descrip Ind</td>
+                                            <td class="col-md-9 text-center">X</td>
+                                            <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.15,000.0</td>
+                                        </tr>
+                                    `);
+                                }
+                            </script>
+                        </thead>
+                        <!--Total gastos de un tipo-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span>Total gastos individuales genericos:</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN>S/.3.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        <!--CABECERA DE TIPO DE GASTOS -->
+                        <thead class="cabecera-3">
+                            <tr>
+                                <th class="text-left" style="font-size: 12px;">Sanciones por infracciones</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;"></span><br>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <!-- Filas generadas dinámicamente-->
+                        <thead>
+                            <script>
+                                for (var i = 0; i < 2; i++) {
+                                    document.write(`
+                                        <tr>
+                                            <td class="col-md-9 ">Sancion X</td>
+                                            <td class="col-md-9 text-center">X</td>
+                                            <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.15,000.0</td>
+                                        </tr>
+                                    `);
+                                }
+                            </script>
+                        </thead>
+                        <!--Total gastos de un tipo-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span>Total infracciones:</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN>S/.3.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        <!--TOTAL GASTOS INDIVIDUALES-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span style="color: purple;">Total consumo individual:</span></strong>
+                                    </h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN
+                                                style="color: purple;">S/.3.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+
+                    <!-- TERCERA TABLA, PAGO POR CAJA CHICA-->
+                    <table class="table table-bordered">
+                        <thead class="cabecera-1">
+                            <!--1ERA CABECERA -->
+                            <tr>
+                                <th class="text-left">Cuota de mantenimiento por caja chica</th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <thead class="cabecera-2">
+                            <!--2DA CABECERA -->
+                            <tr>
+                                <th class="text-left" style="font-size: 11px;">Descripción</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Caja del mes anterior</span>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;">%Area</span><br>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">N°Deshabitados</span><br>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Monto min. de
+                                        descuento</span><br>
+                                </th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Importe S/.</span><br>
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--Datos caja chica-->
+                        <thead>
+                            <tr>
+                                <td class="col-md-9 ">Calculo</td>
+                                <td class="col-md-9 text-center">S/.8,000.0</td>
+                                <td class="col-md-3 text-right"><i class="fa fa-inr"></i>0.0031</td>
+                                <td class="col-md-3 text-right"><i class="fa fa-inr"></i>7</td>
+                                <td class="col-md-3 text-right"><i class="fa fa-inr"></i>10</td>
+                                <td class="col-md-3 text-right"><i class="fa fa-inr"></i>S/.100</td>
+                            </tr>
+                        </thead>
+
+                        <!--TOTAL CUOTA MANT GASTOS INDIVIDUALES-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span style="color: purple;">Total cuota de
+                                                mantenimiento:</span></strong>
+                                    </h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-center">
+                                    <h2><strong><i class="fa fa-inr"></i></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN
+                                                style="color: purple;">S/.100</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <!-- CUARTA TABLA, TOTAL PAGO-->
+                    <table class="table table-bordered">
+                        <thead class="cabecera-1">
+                            <!--1ERA CABECERA -->
+                            <tr>
+                                <th class="text-left">Total a pagar</th>
+                                <th class="text-center">
+                                    <span style="font-size: 12px; text-align: center;"></span>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <thead class="cabecera-2">
+                            <!--2DA CABECERA -->
+                            <tr>
+                                <th class="text-left" style="font-size: 11px;">Descripción</th>
+                                <th class="text-center">
+                                    <span style="font-size: 11px; text-align: center;">Importe S/.</span>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <!--subtotal-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span>Sub Total:</span></strong></h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN>S/.300.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <td class="col-md-9 ">Ajuste</td>
+                                <td class="col-md-9 text-center">S/. 0.0</td>
+                            </tr>
+                        </thead>
+                        <!--TOTAL GASTOS INDIVIDUALES-->
+                        <thead>
+                            <tr>
+                                <td class="text-left">
+                                    <h2><strong><span style="color: rgb(148, 103, 6);">Total del mes:</span></strong>
+                                    </h2>
+                                </td>
+                                <td class="text-left text-danger text-right">
+                                    <h2><strong><i class="fa fa-inr"></i><spaN
+                                                style="color:rgb(148, 103, 6);">S/.300.0</span></strong></h2>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- TABLA FINAL -->
+                <div>
+                    <div class="receipt-right" style="padding: 1px;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed;">
+                            <tbody>
+                                <tr style="height: 4px;">
+                                    <td style="width: 97%; height: 4px; border: 1px solid #000000;" rowspan="5">Mensaje al Propietario:</td>
+                                    <td style="width: 97%; height: 4px; border: 1px solid #000000;" colspan="2">1er Comentario</td>
+                                </tr>
+                                <tr style="height: 3px;">
+                                    <td style="width: 97%; height: 3px; border: 1px solid #000000;">Fecha Emisión</td>
+                                    <td style="width: 97%; height: 3px; border: 1px solid #000000;">Fecha Vencimiento</td>
+                                </tr>
+                                <tr style="height: 6.5px;">
+                                    <td style="width: 44.8572%; height: 6.5px; border: 1px solid #000000;">10/03/2023</td>
+                                    <td style="width: 44.8572%; height: 6.5px; border: 1px solid #000000;">20/03/2023</td>
+                                </tr>
+                                <tr style="height: 12px;">
+                                    <td style="width: 44.8572%; height: 12px; border: 1px solid #000000;">Total Mes</td>
+                                    <td style="width: 44.8572%; height: 12px; border: 1px solid #000000;">S/.300.0</td>
+                                </tr>
+                                <tr style="height: 10px;">
+                                    <td style="width: 97%; height: 10px; border: 1px solid #000000;" colspan="2">2do Comentario
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 
+                <div class="row">
+                    <div class="receipt-header receipt-header-mid receipt-footer">
+                        <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                            <div class="receipt-right">
+                                <p><b>Date :</b> 15 Aug 2016</p>
+                                <h5 style="color: rgb(140, 140, 140);">Thanks for shopping.!</h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <div class="receipt-left">
+                                <h1>Stamp</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>

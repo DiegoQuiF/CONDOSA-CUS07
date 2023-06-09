@@ -1,0 +1,122 @@
+
+/*COLOR DEL FONDO DE LA PAGINA*/
+body {
+    background: #eee;
+    margin-top: 20px;
+}
+/*Color del texto del total de un tipo de pago*/
+.text-danger strong {
+    color: #000000;
+}
+
+/*PRIMER BORDE SUPERIOR, ANTES DEL RECIBO*/
+.receipt-main::after {
+    background: #2525d1 none repeat scroll 0 0;
+    content: "";
+    height: 5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: -13px;
+}
+
+/*DATOS TODO EL RECIBO*/
+.receipt-main {
+    background: #ffffff none repeat scroll 0 0; /*Fondo tabla*/
+    border-bottom: 12px solid #333333; /*Borde inferior*/
+    border-top: 12px solid #000080; /*Borde superior*/
+    margin-top: 50px; 
+    margin-bottom: 50px;
+    padding: 40px 30px !important; /*ESPACIO EN IZQ Y DERECHA*/
+    position: relative;
+    box-shadow: 0 1px 21px #acacac; /*SOMBRA*/
+    color: #333333; /*COLOR DE LAS LETRAS GENERICAS*/
+    font-family: open sans;/*FUENTE DE LAS LETRAS GENERICAS*/
+}
+
+.cabecera-1 {
+    /* Fondo  */
+    background: #7180d8 none repeat scroll 0 0;
+    /*Texto blanco */
+    color: #3a3a3a;
+    height: 1px;
+}
+
+.cabecera-2 {
+    /* Fondo  */
+    background: #2525d1;
+    /*Texto blanco */
+    color: #ffffff;
+    height: 1px;
+}
+
+.cabecera-3 {
+    /* Fondo  */
+    background: #d0d3e7;
+    /*Texto blanco */
+    color: #cf1c1c;
+    height: 1px;
+}
+
+/* Estilos para los textos finales del estampado*/
+.receipt-right h5 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 7px 0;
+}
+
+
+
+/* Estilos para las celdas de la tabla dentro de "receipt-main" */
+.receipt-main td {
+    padding: 9px 20px !important;
+}
+
+
+/*tamaño de cabeceras Y - X (n) esl num de columna*/
+.receipt-main th:nth-child(1) {
+    width: 90%;
+}
+
+.receipt-main th:nth-child(2) {
+    width: 10%;
+}
+
+.recibofinal-1column {
+    width: 50%;
+}
+
+.recibofinal-2column {
+    width: 50%;
+}
+
+/*Tamaño del texto del las filas de TODO EL RECIBO*/
+.receipt-main td {
+    font-size: 14px;
+    font-weight: initial !important;
+}
+
+.receipt-main td p:last-child {
+    margin: 0;
+    padding: 0;
+}
+
+/*TEXTO TOTAL GASTO*/
+.receipt-main td h2 {
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.receipt-header-mid .receipt-left h1 {
+    font-weight: 1;
+    margin: 34px 0 0;
+    text-align: right;
+    text-transform: uppercase;
+}
+/*ESPACIO QUE HAY ENTRE EL NOMBRE DEL DESTINATARIO Y LA TABLA PRINCIPAL*/
+.receipt-header-mid {
+    margin: 24px 0;
+    overflow: hidden;
+}

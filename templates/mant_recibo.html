@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mant Recibo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .table-bordered {
+            border: 2px solid #000080;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mant Recibo</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID Mant Recibo</th>
+                    <th>ID Casa</th>
+                    <th>Número de Recibo</th>
+                    <th>Período</th>
+                    <th>Fecha de Emisión</th>
+                    <th>Fecha de Vencimiento</th>
+                    <th>Importe</th>
+                    <th>Ajuste</th>
+                    <th>Observación</th>
+                    <th>ID Recibo Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mant_recibo in datos_mant_recibo %}
+                <tr>
+                    <td>{{ mant_recibo[0] }}</td>
+                    <td>{{ mant_recibo[1] }}</td>
+                    <td>{{ mant_recibo[2] }}</td>
+                    <td>{{ mant_recibo[3] }}</td>
+                    <td>{{ mant_recibo[4] }}</td>
+                    <td>{{ mant_recibo[5] }}</td>
+                    <td>{{ mant_recibo[6] }}</td>
+                    <td>{{ mant_recibo[7] }}</td>
+                    <td>{{ mant_recibo[8] }}</td>
+                    <td>{{ mant_recibo[9] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
