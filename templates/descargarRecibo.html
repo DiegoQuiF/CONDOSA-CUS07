@@ -9,7 +9,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles2.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-<title>CONDOSA</title>
+    <title>CONDOSA</title>
 </head>
 
 
@@ -60,26 +60,30 @@
                             <th scope="col">Área total (m2)</th>
                             <th scope="col">Monto mínimo (S/.)</th>
                             <th scope="col">Monto x área <br> de mantenimiento (S/.)</th>
+                            <th scope="col">Recibo</th>
                             <th scope="col">Seleccionado</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for cuadro in cuadros %}
-                            <tr>
-                                <th scope="row">{{ cuadro.numero }}</th>
-                                <td>{{ cuadro.bloque }}</td>
-                                <td>{{ cuadro.estado }}</td>
-                                <td>{{ cuadro.area }}</td>
-                                <td>{{ cuadro.area_cochera }}</td>
-                                <td>{{ cuadro.area_total }}</td>
-                                <td>{{ cuadro.montominimo }}</td>
-                                <td>{{ cuadro.montoxarea }}</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="position: absolute;">
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr>
+                            <th scope="row">{{ cuadro.numero }}</th>
+                            <td>{{ cuadro.bloque }}</td>
+                            <td>{{ cuadro.estado }}</td>
+                            <td>{{ cuadro.area }}</td>
+                            <td>{{ cuadro.area_cochera }}</td>
+                            <td>{{ cuadro.area_total }}</td>
+                            <td>{{ cuadro.montominimo }}</td>
+                            <td>{{ cuadro.montoxarea }}</td>
+                            <td><a class="btn btn-primary" href="/{{ cuadro.numero }}/cuadroCostos/descargarRecibo/reciboTotal"
+                                    style="font-size: 13px; padding: 5px 10px;">Ver</a></td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                        style="position: absolute;">
+                                </div>
+                            </td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
@@ -90,13 +94,15 @@
     <p><br><br><br><br></p>
     <div class="container text-center">
         {% for predio in predios %}
-            <a class="btn btn-secondary" href="/{{ predio.id_predio }}/cuadroCostos/descargarRecibo">Descargar recibos de mantenimiento seleccionados</a>
+        <a class="btn btn-secondary" href="/{{ predio.id_predio }}/cuadroCostos/descargarRecibo">Descargar recibos de
+            mantenimiento seleccionados</a>
         {% endfor %}
     </div>
     <br>
     <div class="container text-center">
         {% for predio in predios %}
-            <a class="btn btn-primary" href="/{{ predio.id_predio }}/cuadroCostos/descargarRecibo/reciboTotal">Ver seleccionado</a>
+        <a class="btn btn-primary" href="/{{ predio.id_predio }}/cuadroCostos/descargarRecibo/reciboTotal">Ver Recibos
+            seleccionados</a>
         {% endfor %}
     </div>
 
