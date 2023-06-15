@@ -31,26 +31,44 @@ def main():
 
 @app.route("/<int:id>")
 def condominio(id):
-    predios = []
+    prediosi = []
     periodos = []
+    predios = []
+    montoCC = []
+    montoMM = []
     consulta1 = "select PR.id_predio, CONCAT(TP.nomre_predio, ' \"', PR.descripcion, '\"') as predios from tipo_predio TP, predio PR where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_predio = "+str(id)+";"
-    consulta2 = "select 'Último periodo' as periodos;"
+    consulta2 = "select 'Mayo - 23' as periodos;"
+    consulta3 = "select PR.id_predio, CONCAT(TP.nomre_predio, ' \"', PR.descripcion, '\"') as predios from tipo_predio TP, predio PR where TP.id_tipo_predio = PR.id_tipo_predio;"
+    consulta4 = "select 'XXX,XXX.XX' as monto;"
+    consulta5 = "select 'XXX,XXX.XX' as monto;"
     conn = connection()
     cursor = conn.cursor()
     try:
         cursor.execute(consulta1)
         for row in cursor.fetchall():
-            predios.append({"id_predio":row[0], "predios":row[1]})
+            prediosi.append({"id_predio":row[0], "predios":row[1]})
         
         cursor.execute(consulta2)
         for row in cursor.fetchall():
             periodos.append({"periodos":row[0]})
+
+        cursor.execute(consulta3)
+        for row in cursor.fetchall():
+            predios.append({"id_predio":row[0], "predios":row[1]})
+        
+        cursor.execute(consulta4)
+        for row in cursor.fetchall():
+            montoCC.append({"monto":row[0]})
+        
+        cursor.execute(consulta5)
+        for row in cursor.fetchall():
+            montoMM.append({"monto":row[0]})
     except psycopg2.Error as error:
         print('error al extrear los datos de la consulta: ', error)
     finally:
         cursor.close()
         conn.close()
-    return render_template("index_CD.html", predios = predios, periodos = periodos)
+    return render_template("index_CD.html", prediosi = prediosi, periodos = periodos, predios = predios, montoCC = montoCC, montoMM = montoMM)
 
 @app.route('/<int:id>/cuadroCostos')
 def cuadroCostos(id):
