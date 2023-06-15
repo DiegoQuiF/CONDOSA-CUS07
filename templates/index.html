@@ -29,14 +29,14 @@
                 <!--CONTENIDO-->
                 <div class="contenido-int">
                     <div class="container text-center">
-                        <p class="text-1"><b>GENERAR RECIBOS DE MANTENIMIENTO</b></p>
+                        <p class="text-0"><b>GENERAR RECIBOS DE MANTENIMIENTO</b></p>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Seleccione un predio
                             </button>
                             <ul class="dropdown-menu">
                                 {% for predio in predios %}
-                                    <li><a class="dropdown-item" href="/{{ predio.id_predio }}">{{ predio.predios }}</a></li>
+                                    <li><a class="dropdown-item" href="/{{ predio.id_predio }}">{{ predio.predio }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>

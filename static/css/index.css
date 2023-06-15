@@ -46,25 +46,31 @@ section {
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 10px;
-    backdrop-filter: blur(3px);
-    width: 1280px;
+    backdrop-filter: blur(4px);
+    width: 1400px;
     height: 750px;
 }
 
-.text-1 {
+.text-0 {
     font-size: 1.4rem;
     padding-left: 0;
     margin: 0.7rem;
 }
 
+.text-1 {
+    font-size: 1.25rem;
+    padding-left: 0;
+    margin: 0.7rem;
+}
+
 .text-2 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     padding-left: 1.5rem;
     margin: 0.7rem;
 }
 
 .text-3 {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     padding-left: 3rem;
     margin: 0.7rem;
 }

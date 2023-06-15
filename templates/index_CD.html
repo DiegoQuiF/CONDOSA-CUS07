@@ -29,14 +29,14 @@
                 <!--CONTENIDO-->
                 <div class="contenido-int">
                     <div class="container text-center">
-                        <p class="text-1"><b>GENERAR RECIBOS DE MANTENIMIENTO</b></p>
+                        <p class="text-0"><b>GENERAR RECIBOS DE MANTENIMIENTO</b></p>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Seleccione un predio
                             </button>
                             <ul class="dropdown-menu">
                                 {% for predio in predios %}
-                                    <li><a class="dropdown-item" href="/{{ predio.id_predio }}">{{ predio.predios }}</a></li>
+                                    <li><a class="dropdown-item" href="/{{ predio.id_predio }}">{{ predio.predio }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -46,19 +46,14 @@
                     <div>
                         <p class="text-1"><b>1. Cálculo de monto de caja chica y monto mínimo de mantenimiento</b></p>
                         {% for predioi in prediosi %}
-                            <p class="text-2">• Predio seleccionado: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>{{ predioi.predios }}</i></p>
+                            <p class="text-2">• Predio seleccionado: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i>{{ predioi.predio }}</i></p>
+                            <p class="text-2">• Presidente de la junta: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{ predioi.presidente }}</p>
                         {% endfor %}
-                        <p class="text-2">• Presidente de la junta: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Nombre del presidente de la junta de propietarios</p>
-                        {% for periodo in periodos %}
-                            <p class="text-2">• Periodo (Últ.): &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                &nbsp; &nbsp; &nbsp; &nbsp;{{ periodo.periodos }}</p>
-                        {% endfor %}
-                        {% for montoCC in montoCC %}
-                            <p class="text-2" style="padding-top: 0.5rem;">• Monto de caja chica (S/.): &nbsp; &nbsp; &nbsp; &nbsp;{{ montoCC.monto }}</p>
-                        {% endfor %}
-                        {% for montoMM in montoMM %}
-                            <p class="text-2">• Monto mín. de mant. (S/.):  &nbsp; &nbsp; &nbsp;{{ montoMM.monto }}</p>
-                        {% endfor %}
+                        
+                        <p class="text-2">• Periodo (Últ.): &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp;Mayo - 23</p>
+                        <p class="text-2" style="padding-top: 0.5rem;">• Monto de caja chica (S/.): &nbsp; &nbsp; &nbsp; &nbsp;XXX,XXX.XX</p>
+                        <p class="text-2">• Monto mín. de mant. (S/.):  &nbsp; &nbsp; &nbsp;XXX,XXX.XX</p>
                     </div>
 
                     <div class="container text-center">
@@ -67,8 +62,8 @@
                         {% endfor %}
                     </div>
 
-                    <div>
-                        <div class="container text-center" style="padding-top: 15.5rem;">
+                    <div style="padding-top: 15.5rem;">
+                        <div class="container text-center">
                             {% for predioi in prediosi %}
                                 <a class="btn btn-primary" href="/{{ predioi.id_predio }}/cuadroCostos">Comprobar y continuar</a>
                             {% endfor %}
