@@ -122,7 +122,7 @@ def reciboTotal(id, idhab):
     datosPredio = []
     datosPersona = []
     #DATOS DEL PREDIO Y EL RECIBO
-    consultaRecibo_Predio = "select PR.id_predio, CONCAT(TP.nomre_predio, ' "', PR.descripcion, '"') as predios, PR.ruc, MR.n_recibo, MR.periodo, PR.direccion from tipo_predio TP, predio PR, mant_recibo MR where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_predio = "+str(id)+";"    
+    consultaRecibo_Predio = "select PR.id_predio, CONCAT(TP.nomre_predio, ' \"', PR.descripcion, '\"') as nombre_predio, PR.ruc, MR.n_recibo, MR.periodo, PR.direccion from tipo_predio TP, predio PR, mant_recibo MR where TP.id_tipo_predio = PR.id_tipo_predio and PR.id_predio = "+str(id)+";"    
     #DATOS DE LA PERSONA 
     consultaRecibo_Persona = "select PD.id_predio, CA.numero, CONCAT(PE.nombres, ' ', PE.apellido_paterno, ' ', PE.apellido_materno) as nombreCompleto, CA.area, CA.participacion from persona PE, propietario PR, casa CA,predio PD where PR.id_persona = PE.id_persona and PR.id_casa = CA.id_casa and PD.id_predio = CA.id_predio and CA.numero = "+str(idhab)+" ;"
     
@@ -134,7 +134,16 @@ def reciboTotal(id, idhab):
             datosPredio.append({"id_predio":row[0], "nombre_predio":row[1], "ruc":row[2], "num_recibo":row[3], "periodo":row[4], "direccion":row[5]})
         cursor.execute(consultaRecibo_Persona)
         for row in cursor.fetchall():
-            datosPredio.append({"id_predio":row[0], "num_casa":row[1], "nombres_apellidos":row[2], "area_casa":row[3], "participacion":row[4]})
+            datosPersona.append({"id_predio":row[0], "num_casa":row[1], "nombres_apellidos":row[2], "area_casa":row[3], "participacion":row[4]})
+        #DATOS PARA EL RECIBO   
+        nombre_predio = datosPredio[0]["nombre_predio"]
+        ruc = datosPredio[0]["ruc"]
+        num_recibo = datosPredio[0]["num_recibo"]
+        periodo = datosPredio[0]["periodo"]
+        direccion = datosPredio[0]["direccion"]
+        #DATOS DE LA PERSONA
+
+
     except psycopg2.Error as error:
         print('error al extrear los datos de la consulta: ', error)
 
@@ -142,7 +151,7 @@ def reciboTotal(id, idhab):
         cursor.close()
         conn.close()
         
-    return render_template("reciboTotal.html", datosPredio = datosPredio, datosPersona = datosPersona)
+    return render_template("reciboTotal.html", datosPersona=datosPersona,nombre_predio = nombre_predio, ruc = ruc, num_recibo=num_recibo, periodo=periodo, direccion=direccion)
 
 @app.route('/recibo_estado')
 def mostrar_recibo_estado():

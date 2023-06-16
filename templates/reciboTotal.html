@@ -41,30 +41,31 @@
                             <div class="receipt-right" style=" padding: 10px;">
                                 <table style="width: 100%; border-collapse: collapse; text-align: center;">
                                     <tbody>
+                                        <!-- NOMBRE DEL PREDIO-->
                                         <tr style="height: 4.5px;">
                                             <td style="width: 97%; height: 4.5px; border: 1px solid #000000;"
-                                                colspan="2">CONJUNTO RESIDENCIAL EL PALOMAR</td>
+                                                colspan="2">{{ nombre_predio }}</td>
                                         </tr>
                                         <tr style="height: 3px;">
                                             <td style="width: 97%; height: 3px; border: 1px solid #000000;" colspan="2">
-                                                RUC: 9999999999&nbsp;&nbsp;&nbsp;</td>
+                                                RUC: {{ruc}}&nbsp;&nbsp;&nbsp;</td>
                                         </tr>
                                         <tr style="height: 9px;">
                                             <td style="width: 44.8572%; height: 9px; border: 1px solid #000000;">
                                                 &nbsp;Recibo N&deg;</td>
                                             <td style="width: 52.1428%; height: 9px; border: 1px solid #000000;">C 101 -
-                                                5831</td>
+                                                {{num_recibo}}</td>
                                         </tr>
                                         <tr style="height: 12px;">
                                             <td style="width: 44.8572%; height: 12px; border: 1px solid #000000;">
                                                 &nbsp;Periodo:&nbsp;</td>
                                             <td style="width: 52.1428%; height: 12px; border: 1px solid #000000;">
-                                                &nbsp;Mar 23</td>
+                                                &nbsp;{{periodo}}</td>
                                         </tr>
                                         <tr style="height: 10px;">
                                             <td style="width: 97%; height: 10px; border: 1px solid #000000;"
                                                 colspan="2">
-                                                AV. PASEO LA CASTELLANA N&deg;123 TORRE NRO. C INT 1904 LIMA-LIMA-LINCE
+                                                {{direccion}}
                                             </td>
                                         </tr>
                                     </tbody>
