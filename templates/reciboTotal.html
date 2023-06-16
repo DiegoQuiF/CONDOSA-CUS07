@@ -54,7 +54,7 @@
                                             <tr style="height: 9px;">
                                                 <td style="width: 44.8572%; height: 9px; border: 1px solid #000000;">
                                                     &nbsp;Recibo N&deg;</td>
-                                                <td style="width: 52.1428%; height: 9px; border: 1px solid #000000;">C 101 -
+                                                <td style="width: 52.1428%; height: 9px; border: 1px solid #000000;">
                                                     {{num_recibo}}</td>
                                             </tr>
                                             <tr style="height: 12px;">
@@ -83,7 +83,7 @@
                             <!-- COLUMNA IZQUIERDA -->
                             <div class="col-xs-8 col-sm-8 col-md-8 text-left">
                                 <div class="receipt-left">
-                                    <h3 style="font-size: 2rem"><b>Jose Alberto Torres Carranza</b></h3>
+                                    <h3 style="font-size: 2rem"><b>{{ datosPersona[0]['nombres_apellidos'] }}</b></h3>
                                 </div>
                             </div>
                             <!-- COLUMNA DERECHA -->
@@ -104,15 +104,15 @@
                                     <th class="text-left">Importe por servicios comunes</th>
                                     <th class="text-center">
                                         <span style="text-align: center;">Habitación</span><br>
-                                        <span style="text-align: center;">C 101 </span>
+                                        <span style="text-align: center;">{{ datosPersona[0]['desc_mdu'] }} {{ datosPersona[0]['num_casa'] }} </span>
                                     </th>
                                     <th class="text-center">
                                         <span style="text-align: center;">Area ocupada</span><br>
-                                        <span style="text-align: center;">90.5 </span>
+                                        <span style="text-align: center;">{{ datosPersona[0]['area_casa'] }}</span>
                                     </th>
                                     <th class="text-center">
                                         <span style="text-align: center;">%Participación</span><br>
-                                        <span style="text-align: center;">0.31%</span>
+                                        <span style="text-align: center;">{{ datosPersona[0]['participacion'] }}</span>
                                     </th>
                                 </tr>
                             </thead>
