@@ -114,8 +114,8 @@ def descargarRecibo(id):
 
     return render_template("descargarRecibo.html", cuadro = cuadro, prediosi = prediosi)
 
-@app.route('/<int:id>/cuadroCostos/descargarRecibo/reciboTotal')
-def reciboTotal(id):
+@app.route('/<int:id>/cuadroCostos/descargarRecibo/<int:id1>')
+def reciboTotal(id, id1):
     return render_template("reciboTotal.html")
 
 @app.route('/recibo_estado')
