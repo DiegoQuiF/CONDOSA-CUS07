@@ -45,28 +45,28 @@
                                             <!-- NOMBRE DEL PREDIO-->
                                             <tr style="height: 4.5px;">
                                                 <td style="width: 97%; height: 4.5px; border: 1px solid #000000;"
-                                                    colspan="2">{{ nombre_predio }}</td>
+                                                    colspan="2">{{ datosPredioSuperior[0]["nombre_predio"] }}</td>
                                             </tr>
                                             <tr style="height: 3px;">
                                                 <td style="width: 97%; height: 3px; border: 1px solid #000000;" colspan="2">
-                                                    RUC: {{ruc}}&nbsp;&nbsp;&nbsp;</td>
+                                                    RUC: {{datosPredioSuperior[0]["ruc"]}}&nbsp;&nbsp;&nbsp;</td>
                                             </tr>
                                             <tr style="height: 9px;">
                                                 <td style="width: 44.8572%; height: 9px; border: 1px solid #000000;">
                                                     &nbsp;Recibo N&deg;</td>
                                                 <td style="width: 52.1428%; height: 9px; border: 1px solid #000000;">
-                                                    {{num_recibo}}</td>
+                                                    {{datosPredioSuperior[0]["num_recibo"]}}</td>
                                             </tr>
                                             <tr style="height: 12px;">
                                                 <td style="width: 44.8572%; height: 12px; border: 1px solid #000000;">
                                                     &nbsp;Periodo:&nbsp;</td>
                                                 <td style="width: 52.1428%; height: 12px; border: 1px solid #000000;">
-                                                    &nbsp;{{periodo}}</td>
+                                                    &nbsp;{{datosPredioSuperior[0]["periodo"]}}</td>
                                             </tr>
                                             <tr style="height: 10px;">
                                                 <td style="width: 97%; height: 10px; border: 1px solid #000000;"
                                                     colspan="2">
-                                                    {{direccion}}
+                                                    {{datosPredioSuperior[0]["direccion"]}}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -526,8 +526,8 @@
                                         <td style="width: 97%; height: 3px; border: 1px solid #000000;">Fecha Vencimiento</td>
                                     </tr>
                                     <tr style="height: 6.5px;">
-                                        <td style="width: 44.8572%; height: 6.5px; border: 1px solid #000000;">10/03/2023</td>
-                                        <td style="width: 44.8572%; height: 6.5px; border: 1px solid #000000;">20/03/2023</td>
+                                        <td style="width: 44.8572%; height: 6.5px; border: 1px solid #000000;">{{datosPredioInferior[0]['fecha_emision']}}</td>
+                                        <td style="width: 44.8572%; height: 6.5px; border: 1px solid #000000;">{{datosPredioInferior[0]['fecha_vencimiento']}}</td>
                                     </tr>
                                     <tr style="height: 12px;">
                                         <td style="width: 44.8572%; height: 12px; border: 1px solid #000000;">Total Mes</td>
