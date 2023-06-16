@@ -36,7 +36,7 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Seleccione un predio
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style="overflow: auto; height: 500px;">
                                 {% for predio in predios %}
                                     <li><a class="dropdown-item" href="/{{ predio.id_predio }}">{{ predio.predio }}</a></li>
                                 {% endfor %}

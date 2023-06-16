@@ -10,9 +10,20 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 92.4vh;
+    min-height: 92.3vh;
     width: 100%;
     background: url('fondoPantalla.jpg')no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.sectionv2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 92.4vh;
+    width: 100%;
+    background: url('FondoAzul.jpg')no-repeat;
     background-position: center;
     background-size: cover;
 }
